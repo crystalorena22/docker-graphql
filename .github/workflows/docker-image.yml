@@ -30,7 +30,7 @@ jobs:
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        NEW_VERSION:  ${{ steps.version.outputs.version }}
+        NEW_VERSION: ${{ steps.version.outputs.version }}
         
       run:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -38,14 +38,14 @@ jobs:
 
     - name: Build Docker Image
       env:
-        NEW_VERSION:  ${{ steps.version.outputs.version }}
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run:
         docker build -t cryss/docker-graphql:$NEW_VERSION .
         docker build -t cryss/docker-graphql:latest .
         
     - name: Push Docker Image
       env:
-        NEW_VERSION:  ${{ steps.version.outputs.version }}
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run:
        docker push cryss/docker-graphql:$NEW_VERSION
        docker push cryss/docker-graphql:latest 
